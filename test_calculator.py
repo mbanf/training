@@ -3,7 +3,7 @@ Tests for the calculator module.
 """
 
 import pytest
-from calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide, print_hello_world
 
 
 def test_add():
@@ -38,3 +38,9 @@ def test_divide_by_zero():
     """Test that dividing by zero raises an error."""
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         divide(5, 0)
+
+
+def test_print_hello_world():
+    """Test print_hello_world function."""
+    result = print_hello_world()
+    assert result == "Hello, World!"

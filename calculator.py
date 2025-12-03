@@ -23,3 +23,10 @@ def divide(a: float, b: float) -> float:
     if b == 0:
         raise ValueError("Cannot divide by zero")
     return a / b
+
+
+def print_hello_world() -> str:
+    """Print and return 'Hello, World!'."""
+    message = "Hello, World!"
+    print(message)
+    return message
