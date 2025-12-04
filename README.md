@@ -1,6 +1,6 @@
-# Python GitHub Actions Example
+# Python GitHub Actions Example with Docker
 
-A minimal Python project to test GitHub Actions CI/CD.
+A minimal Python project to demonstrate GitHub Actions CI/CD with automated Docker image builds.
 
 ## Project Structure
 
@@ -11,6 +11,9 @@ training/
 │       └── test.yml          # GitHub Actions workflow
 ├── calculator.py             # Simple calculator module
 ├── test_calculator.py        # Pytest test suite
+├── main.py                   # Demo script (Docker entry point)
+├── Dockerfile                # Docker image definition
+├── .dockerignore             # Docker build exclusions
 ├── requirements.txt          # Python dependencies
 └── README.md                 # This file
 ```
@@ -25,36 +28,85 @@ pip install -r requirements.txt
 
 # Run tests
 pytest -v test_calculator.py
+
+# Run the demo script
+python main.py
+```
+
+## Docker Usage
+
+### Build Docker Image Locally
+
+```bash
+docker build -t calculator .
+```
+
+### Run the Docker Container
+
+```bash
+docker run calculator
+```
+
+This will execute the demo script that showcases all calculator functions.
+
+### Pull from GitHub Container Registry
+
+After pushing to GitHub, the image will be automatically built and published. You can pull and run it:
+
+```bash
+# Pull the latest version
+docker pull ghcr.io/mbanf/training:latest
+
+# Run the pulled image
+docker run ghcr.io/mbanf/training:latest
+
+# Pull a specific version (by commit SHA)
+docker pull ghcr.io/mbanf/training:<commit-sha>
 ```
 
 ## GitHub Actions
 
 The workflow (`.github/workflows/test.yml`) will automatically:
+
+### Testing (on every push and PR)
 - Run on every push to `main` or `master` branches
 - Run on every pull request to `main` or `master` branches
 - Test against Python 3.9, 3.10, and 3.11
 - Install dependencies from `requirements.txt`
 - Run all tests with pytest
 
-## Next Steps
+### Docker Build (on push to main only)
+- Build Docker image after all tests pass
+- Push to GitHub Container Registry (ghcr.io)
+- Tag with:
+  - `latest` for the most recent build on main branch
+  - Git commit SHA for version tracking
 
-1. Commit and push this code to your GitHub repository:
+## Deployment
+
+1. Commit and push your code:
    ```bash
    git add .
-   git commit -m "Add minimal Python example with GitHub Actions"
+   git commit -m "Your commit message"
    git push origin main
    ```
 
-2. Go to your GitHub repository and click on the "Actions" tab to see the workflow run
+2. GitHub Actions will automatically:
+   - Run all tests
+   - Build the Docker image
+   - Push to ghcr.io/mbanf/training
 
-3. The workflow will run automatically on each push and pull request
+3. Monitor the workflow at: https://github.com/mbanf/training/actions
 
-## What the Tests Cover
+4. View published packages at: https://github.com/mbanf?tab=packages
+
+## What the Calculator Does
 
 The calculator module includes basic arithmetic operations:
 - Addition
 - Subtraction
 - Multiplication
 - Division (with zero-division error handling)
+- Hello World function
 
 Each operation has corresponding tests to ensure correctness.
