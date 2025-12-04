@@ -3,7 +3,8 @@ Tests for the calculator module.
 """
 
 import pytest
-from calculator import add, subtract, multiply, divide, print_hello_world
+
+from calculator import add, divide, multiply, print_hello_world, subtract
 
 
 def test_add():

@@ -1,0 +1,70 @@
+[project]
+name = "calculator"
+version = "0.1.0"
+description = "A simple calculator with CI/CD"
+
+[tool.ruff]
+# Line length
+line-length = 100
+
+# Python version
+target-version = "py39"
+
+# Exclude patterns
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    ".pytest_cache",
+]
+
+[tool.ruff.lint]
+# Enable linting rules
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+]
+
+# Ignore specific rules if needed
+ignore = []
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+
+# Indent with spaces
+indent-style = "space"
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "test_*.py",
+    "main.py",        # Demo script, not core logic
+    "*/__pycache__/*",
+    ".venv/*",
+    "venv/*",
+]
+
+[tool.coverage.report]
+# Fail if coverage is below this percentage
+fail_under = 80
+
+# Show lines that are missing coverage
+show_missing = true
+
+# Exclude lines from coverage (e.g., debug code, type checking)
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

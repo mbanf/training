@@ -33,6 +33,64 @@ pytest -v test_calculator.py
 python main.py
 ```
 
+## Code Quality
+
+This project uses automated code quality tools to ensure consistent, high-quality code.
+
+### Linting
+
+Check code for issues using ruff:
+
+```bash
+# Check for linting errors
+ruff check .
+
+# Auto-fix linting issues where possible
+ruff check . --fix
+```
+
+### Formatting
+
+Ensure consistent code formatting:
+
+```bash
+# Check if code is properly formatted
+ruff format --check .
+
+# Auto-format all code
+ruff format .
+```
+
+### Code Coverage
+
+Run tests with coverage reporting:
+
+```bash
+# Run tests with coverage (must be ≥80%)
+pytest --cov --cov-report=term-missing
+
+# Generate HTML coverage report
+pytest --cov --cov-report=html
+# Then open htmlcov/index.html in your browser
+```
+
+### Run All Quality Checks
+
+Run all quality checks locally before pushing:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run linting
+ruff check .
+
+# Run formatting check
+ruff format --check .
+
+# Run tests with coverage
+pytest --cov --cov-report=term-missing --cov-fail-under=80
+```
 ## Docker Usage
 
 ### Build Docker Image Locally
@@ -67,6 +125,12 @@ docker pull ghcr.io/mbanf/training:<commit-sha>
 ## GitHub Actions
 
 The workflow (`.github/workflows/test.yml`) will automatically:
+
+### Code Quality (on every push and PR)
+- Run **ruff** linting to check code quality
+- Verify code formatting standards
+- Run tests with **coverage reporting** (minimum 80% required)
+- All quality checks must pass before tests run
 
 ### Testing (on every push and PR)
 - Run on every push to `main` or `master` branches
