@@ -1,0 +1,5 @@
+outs:
+- md5: 217e5247be716649d826bd9a22418efa
+  size: 7553
+  hash: md5
+  path: transcript.txt
